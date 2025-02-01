@@ -1,0 +1,26 @@
+services:
+  traefik:
+    image: traefik:v3.1
+    container_name: traefik
+    ports:
+      - 80:80
+      - 443:443
+      - 8085:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /docker/appdata/traefik/conf:/etc/traefik/conf
+      - /docker/appdata/traefik/certs:/etc/traefik/certs
+      - /docker/appdata/traefik/config/traefik.yml:/etc/traefik/traefik.yml:ro
+    environment:
+      - CLOUDFLARE_DNS_API_TOKEN=PsktJUokkbsXcyxEYc-ZE_19EwUfgVkuPCmQYCLD
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.tls.certresolver=cloudflare"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.gibreel.dev`)"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+    restart: unless-stopped
+
+networks:
+  traefik_network:
+    driver: bridge

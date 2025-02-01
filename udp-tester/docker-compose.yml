@@ -1,0 +1,9 @@
+services:
+  udp-tester:
+    container_name: my-udp-listener
+    image: mendhak/udp-listener
+    environment:
+      - UDPPORT=4001
+    ports:
+    - 4001:4001
+    - 4001:4001/udp

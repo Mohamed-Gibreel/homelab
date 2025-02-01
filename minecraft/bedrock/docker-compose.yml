@@ -1,0 +1,12 @@
+services:
+  minecraft-bedrock:
+    image: itzg/minecraft-bedrock-server
+    container_name: minecraft-bedrock
+    environment:
+      EULA: "TRUE"
+    ports:
+      - "19132:19132/udp"
+    volumes:
+      - /docker/appdata/minecraft/bedrock:/data
+    stdin_open: true
+    tty: true
