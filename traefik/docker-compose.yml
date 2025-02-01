@@ -12,7 +12,7 @@ services:
       - /docker/appdata/traefik/certs:/etc/traefik/certs
       - /docker/appdata/traefik/config/traefik.yml:/etc/traefik/traefik.yml:ro
     environment:
-      - CLOUDFLARE_DNS_API_TOKEN=PsktJUokkbsXcyxEYc-ZE_19EwUfgVkuPCmQYCLD
+      - CLOUDFLARE_DNS_API_TOKEN=${CLOUDFLARE_DNS_API_TOKEN}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.tls=true"
